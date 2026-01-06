@@ -96,15 +96,20 @@ async function addTodo() {
 // Toggle todo completion status
 async function toggleTodo(id, completed) {
     try {
-        const response = await fetch(`${API_URL}/${id}`);
-        const todo = await response.json();
+        // Get the current todo to preserve the title
+        const todos = await (await fetch(API_URL)).json();
+        const todo = todos.find(t => t.id === id);
+        
+        if (!todo) {
+            throw new Error('Todo not found');
+        }
         
         const updateResponse = await fetch(`${API_URL}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ ...todo, completed }),
+            body: JSON.stringify({ title: todo.title, completed }),
         });
         
         if (updateResponse.ok) {

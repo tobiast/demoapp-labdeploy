@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/todos")
-@CrossOrigin(origins = ["*"])
 class TodoController(private val todoRepository: TodoRepository) {
 
     @GetMapping
