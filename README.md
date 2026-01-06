@@ -15,17 +15,24 @@ A simple todo application used for labdeploy testing.
 
 - Docker
 - Docker Compose
+- Java 17 (for building)
 
 ### Steps
 
 1. Clone the repository
-2. Run with Docker Compose:
+2. Build the application:
 
 ```bash
-docker-compose up --build
+./gradlew build -x test
 ```
 
-3. Open your browser and navigate to: `http://localhost:8080`
+3. Run with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+4. Open your browser and navigate to: `http://localhost:8080`
 
 The application will automatically:
 - Start a PostgreSQL database
